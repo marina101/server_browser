@@ -1,8 +1,8 @@
 require 'socket'
  
-host = 'www.tutorialspoint.com'     # The web server
-port = 80                           # Default HTTP port
-path = "/index.htm"                 # The file we want 
+host = 'localhost'     # The web server
+port = 2000                          # Default HTTP port
+path = "index.html"                 # The file we want 
 
 # This is the HTTP request we send to fetch a file
 request = "GET #{path} HTTP/1.0\r\n\r\n"
