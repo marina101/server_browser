@@ -1,3 +1,11 @@
+# Simple Server by Marina C
+# This is a simple server that is mean to work with the tiny browser
+# It uses sockets to listen to browser requests. The server has two files on it
+# and it replies with one or the other depending on the request. The server also
+# can form data from the browser, integrate it into the requested file, and then
+# return the file to the browser with the received data added in.
+# To close the server press control-c
+
 require 'socket'            
 require 'json'
 
@@ -6,7 +14,6 @@ loop {                         # Servers run the whole time
   socket = server.accept      # Wait for a client to connect, returns TCP
                                # socket representing connection once it gets one
   
-
   # Reads the header of incoming http request
   lines = []
   header = ""
@@ -38,11 +45,12 @@ loop {                         # Servers run the whole time
       # parse out the size, in bytes, of the request body from the header
       size_line = lines[2].split(" ")
       body_size = size_line[1].to_i  
-      body = socket.read(body_size.to_i)  #read the body of the message
+      body = socket.read(body_size)  #read the body of the message
 
-      #parses json object and adds submitted content into original html file
+      #parses message body into json object 
       params = JSON.parse(body)
       
+      #adds submitted content into requested html file
       people = "<li>name: #{params['person']['name']}</li><li>e-mail: " +
         "#{params['person']['email']}</li>"
       modified_file = file_contents.gsub("<%= yield %>", people) 
@@ -59,15 +67,16 @@ loop {                         # Servers run the whole time
   
   # Sends response back to browser:
 
+  # header
   socket.print "HTTP/1.1 #{tag}\r\n" +
                "Content-Type: text/plain\r\n" +
                "Content-Length: #{response.bytesize}\r\n" +
                "Connection: close\r\n"
-  # Print a blank line to separate the header from the response body,
-  # as required by the protocol.
+  # a blank line to separate the header from the response body,
+  # as required by http protocol.
   socket.print "\r\n"
 
-  # Print the actual response body"
+  # Sends the response body"
   socket.print response 
   
   socket.close                 # Disconnect from the socket
