@@ -1,18 +1,16 @@
 require 'socket'
 require 'json'
  
-host = 'localhost'     # The web server
-port = 2000                          # Default HTTP port
-path = "index.html"                 # The file we want 
+host = 'localhost'        # The web server
+port = 2000               # Default HTTP port
+path = "index.html"       # The file being requested
 path2 = "thanks.html"
-
-
 
 begin
   puts "What kind of request do you want to send? Enter GET or POST:"
   answer = gets.chomp
   if answer == "GET"
-    # This is the HTTP request we send to fetch a file
+    # Formats http request to send to the server
     request = "GET #{path} HTTP/1.1\r\n\r\n"
 
     socket = TCPSocket.open(host,port)  # Connect to server
@@ -23,6 +21,7 @@ begin
     print body  
 
   elsif answer =="POST"
+    #Get input from user that will be sent to the server
     puts "Please enter your name:"
     name = gets.chomp
     puts "Please enter your email:"
