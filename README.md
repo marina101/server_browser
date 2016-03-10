@@ -10,8 +10,9 @@ b) POST request: you will be asked to enter a name and email. These will be sent
 This server-browser pair uses JSON objects and sockets to send data between each other.
 
 To run:
-1) run simple_server.rb in one terminal window
+1) run simple_oo_server.rb in one terminal window
 2) open another terminal window (while the server is running) and run tiny_browser.rb, follow its instructions
 3) to close the server when you are finished, press control-c
 
 Note: the server must be actively running for the browser to be able to work
+
