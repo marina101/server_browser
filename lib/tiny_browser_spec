@@ -1,3 +1,0 @@
-require "tiny_browser"
-require "spec_helper"
-
