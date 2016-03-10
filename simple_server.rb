@@ -47,7 +47,7 @@ loop {                         # Servers run the whole time
       body_size = size_line[1].to_i  
       body = socket.read(body_size)  #read the body of the message
 
-      #parses message body into json object 
+      #parses message body from json object 
       params = JSON.parse(body)
       
       #adds submitted content into requested html file
